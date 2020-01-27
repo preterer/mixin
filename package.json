@@ -1,7 +1,7 @@
 {
-  "name": "template",
+  "name": "mixin",
   "version": "1.0.0",
-  "description": "Szablon aplikacji",
+  "description": "Typescript extendable mixin approach",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc --declaration",
@@ -10,22 +10,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/preterer/template.git"
+    "url": "git+ssh://git@github.com/preterer/mixin.git"
   },
   "keywords": [
-    "template"
+    "mixin",
+    "typescript"
   ],
   "author": "Michał Baranowski",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/preterer/template/issues"
+    "url": "https://github.com/preterer/mixin/issues"
   },
-  "homepage": "https://github.com/preterer/template#readme",
+  "homepage": "https://github.com/preterer/mixin#readme",
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "^24.0.18",
     "@types/node": "^12.12.14",
     "jest": "^24.9.0",
+    "prettier": "^1.19.1",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
