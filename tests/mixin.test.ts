@@ -1,3 +1,5 @@
+import "reflect-metadata";
+
 import { mixin } from "../src/mixin";
 
 import { A, B, C, D } from "./utils/classes";
@@ -96,6 +98,57 @@ describe("Mixin", function() {
 
     expect(mixed.overwrittenMethod()).toBe(value);
     expect(mixed.overwrittenMethodCaller()).toBe(value);
+  });
+
+  it("Should keep decorators", function() {
+    const classDecoratorMock = jest.fn();
+    function ClassDecorator(): Function {
+      return classDecoratorMock;
+    }
+
+    const propertyDecoratorMock = jest.fn();
+    function PropertyDecorator(): Function {
+      return propertyDecoratorMock;
+    }
+
+    const getterDecoratorMock = jest.fn();
+    function GetterDecorator(): Function {
+      return getterDecoratorMock;
+    }
+
+    const setterDecoratorMock = jest.fn();
+    function SetterDecorator(): Function {
+      return setterDecoratorMock;
+    }
+
+    const parameterDecoratorMock = jest.fn();
+    function ParameterDecorator(): Function {
+      return parameterDecoratorMock;
+    }
+
+    @ClassDecorator()
+    class DecoratedClass {
+      @PropertyDecorator()
+      public decoratedProperty;
+
+      @GetterDecorator()
+      public get accessorGetter() {
+        return;
+      }
+
+      @SetterDecorator()
+      public set accessorSetter(_) {}
+
+      public paramterDecoratorMethod(@ParameterDecorator() _) {}
+    }
+
+    class MixedClass extends mixin(A, DecoratedClass) {}
+
+    expect(classDecoratorMock).toHaveBeenCalledTimes(1);
+    expect(propertyDecoratorMock).toHaveBeenCalledTimes(1);
+    expect(getterDecoratorMock).toHaveBeenCalledTimes(1);
+    expect(setterDecoratorMock).toHaveBeenCalledTimes(1);
+    expect(parameterDecoratorMock).toHaveBeenCalledTimes(1);
   });
 
   function match4Classes(mixed: A & B & C & D, finalClass: { overwrittenProp: string; overwrittenMethod(): string }) {
