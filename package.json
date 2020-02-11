@@ -1,5 +1,5 @@
 {
-  "name": "mixin",
+  "name": "@preterer/mixin",
   "version": "1.0.0",
   "description": "Typescript extendable mixin approach",
   "main": "dist/index.js",
